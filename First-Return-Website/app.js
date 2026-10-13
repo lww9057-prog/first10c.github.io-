@@ -1,0 +1,71 @@
+// Edit this address here if the game moves. The existing game is hosted separately.
+const GAME_URL = 'https://lww9057-prog.github.io/RcyEGaaFiin.github.io-/First-Return-standalone%20(5)';
+const OFFICIAL_URL = 'https://cdsvic.org.au/';
+const app = document.querySelector('#app');
+const img = (name, alt, cls = '') => `<img src="assets/${name}.png" alt="${alt}" class="${cls}" loading="lazy" decoding="async">`;
+const button = (label, href, cls = '') => `<a class="button ${cls}" href="${href}">${label}<span aria-hidden="true">›</span></a>`;
+const external = (label, href, cls = '') => `<a class="button ${cls}" href="${href}" target="_blank" rel="noopener noreferrer">${label}<span aria-hidden="true">↗</span></a>`;
+const gameButton = (label = 'Play the Game', cls = '') => external(label, GAME_URL, cls);
+const facts = () => `<div class="facts"><div><span class="badge" aria-hidden="true">▦</span><span><b>WHEN:</b> Date & time TBC</span></div><div><span class="badge" aria-hidden="true">⌖</span><span><b>WHERE:</b> Meeting point TBC</span></div><div><span class="badge" aria-hidden="true">♧</span><span><b>WHO:</b> Students</span></div></div>`;
+const products = () => `<div class="products">${img('bag','Foldable collection bag with a small storage pouch','bag')}${img('book','Activity Guide booklet','book')}${img('stickers','First Return sticker set','stickers')}${img('bank','Blue recycling-machine coin bank','bank')}</div>`;
+const flow = () => `<div class="flow"><div>${img('bring','Bottle and can')}Bring</div><span aria-hidden="true">→</span><div>${img('machine','Return machine')}Return</div><span aria-hidden="true">→</span><div>${img('share','Students celebrating')}Share</div></div>`;
+const donationIcon = `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="35" cy="16" r="9"/><path d="M35 11v10m3-8h-4a2 2 0 000 4h2a2 2 0 010 4h-4M8 39l10-8 13 1c8 1 8 9 0 9h-8m8 0 18-12c5-3 10 3 5 7L35 52H18l-10-5z"/></svg>`;
+function home() {
+ return `<section class="wrap hero"><div><h1>Your first<br>return<br>starts here.</h1><p>Your first return. Your first 10¢.<br>Your first step.</p><div class="actions">${button('Learn How','#home/about')}${gameButton('Play the Game','outline')}</div></div>${img('hero','Student making her first container return at a blue machine')}</section>
+ <section class="pink wave" id="about"><div class="wrap"><h2>Your First Return <span class="doodle" aria-hidden="true">〟</span></h2><p class="intro">An independent, student-led campaign to make container returns easy, familiar and part of everyday campus life.</p>
+ <div class="steps">${[['01','Check','Look for the 10¢ mark on eligible drink containers.','check'],['02','Find','Locate a return point near your campus or in your community.','find'],['03','Return','Return your eligible containers and receive 10¢ for each one.','receipt']].map(([n,t,p,i])=>`<article class="step"><div><b>${n}</b><h3>${t}</h3><p>${p}</p></div>${img(i,t)}</article>`).join('')}</div>
+ <div class="videos">${['What can go in?','Where to return','Your first 10¢'].map((t,i)=>`<button class="video guide-trigger" data-guide="${i}" aria-expanded="false" aria-controls="return-guide"><div class="thumb">${img('video'+(i+1),t)}</div><strong>${t}<span aria-hidden="true">↗</span></strong></button>`).join('')}</div>
+ <section id="return-guide" class="guide-panel" hidden aria-label="Container return guide"></section></div></section>
+ <section class="wrap split event" id="event">${img('event','Students bringing their containers to a proposed First Returns campus event','event-illustration')}<div><h2>Your First Return,<br>Together <span class="sun" aria-hidden="true">✦</span></h2><h3 class="subheading">Join our first campus return event.</h3><p>Bring your drink containers and make your first return with other students.</p>${facts()}${flow()}${button('View Event Details','#event')}</div></section>
+ <section class="wrap split game-promo" id="game">${img('game','Illustrated preview of a container return game','game-preview')}<div><h2>Play Your First Return</h2><h3>Try a virtual return and save your postcard.</h3><p>A little practice before the real thing. Explore the return process in our interactive game, then share your first step.</p>${gameButton()}</div></section>
+ <section class="sky wave" id="pack"><div class="wrap"><h2>Bring First Return to Your Campus <span class="sun" aria-hidden="true">✦</span></h2><p class="intro">A little pack to help more students make their first return.</p><div class="pack-cols">${products()}<div class="pack-links"><article class="pack-feature"><span class="round-icon" aria-hidden="true">♧</span><div><h3>Host Your Own Return</h3><p>Bring your community together, build your event-planning skills and help the environment — while claiming your container refunds.</p><span class="coming-soon">Activity pack · Coming soon</span></div></article><article class="pack-feature"><span class="round-icon yellow">${donationIcon}</span><div><h3>Donation</h3><p>Our aim is awareness, not profit. Future donations would help fund activity guides and organiser gifts, so more people can get involved.</p>${button('Support the Campaign','#donation','small')}</div></article></div></div><p class="note">Proposed organiser pack: collection bag, coin bank, sticker set and activity guide.</p></div></section>`;
+}
+const guides = [
+ () => `<div class="guide-heading"><div><span class="eyebrow">01 · Check</span><h2>What Can Go In?</h2><p>Check your containers before you head out.</p></div>${img('check','Drink containers')}</div><h3>Meet the containers</h3><div class="container-types">${['Plastic bottles','Aluminium cans','Glass bottles','Drink cartons','Steel drink cans'].map(t=>`<span>${t}</span>`).join('')}</div><p class="note">These are examples. Eligibility depends on the specific drink container.</p><div class="guide-callout"><h3>Look for the 10¢ mark</h3><p>Check the label. If you are unsure, use the official eligibility guide before collecting.</p>${external('Check Container Eligibility',OFFICIAL_URL)}<button class="text-button" data-guide="1">Next: Find a Return Point →</button></div>`,
+ () => `<div class="guide-heading"><div><span class="eyebrow">02 · Find</span><h2>Find Your Return Point</h2><p>A first return could be closer than you think.</p></div>${img('find','Map with a return-point marker')}</div><h3>Find a place that works for you</h3><p>Visit CDS Vic and use its official return-point finder to find a location near your campus or community.</p>${external('Find a Return Point',OFFICIAL_URL)}<div class="details-list"><article class="paper"><h3>Location</h3><p>Check the address and route.</p></article><article class="paper"><h3>Opening hours</h3><p>Confirm when it is open.</p></article><article class="paper"><h3>Return method</h3><p>Read the instructions for your location.</p></article></div><h3>First time? Come with us.</h3><p>Make your first return with other students.</p>${button('View Our First Event','#event')}`,
+ () => `<div class="guide-heading"><div><span class="eyebrow">03 · Return</span><h2>Your First 10¢</h2><p>One small return. Your first step.</p></div>${img('receipt','Receipt showing a ten-cent refund')}</div><h3>Your return, step by step</h3><div class="details-list">${[['01','Arrive','Head to your chosen return point.','find'],['02','Return','Follow the instructions at the location.','machine'],['03','Collect','Choose an available refund option.','receipt']].map(([n,t,p,i])=>`<article class="paper"><span class="eyebrow">${n}</span>${img(i,'','guide-step-image')}<h3>${t}</h3><p>${p}</p></article>`).join('')}</div><p class="note">Refund options vary by return location.</p><div class="actions centered">${button('Join Our Event','#event')}</div>`
+];
+function eventPage() {
+ return `<div class="detail"><a class="back" href="#home/event">← Back to campaign</a><span class="eyebrow">Our first campus event</span><h1>Your First Return,<br>Together.</h1><p class="detail-lead">Never returned a container before? Bring a friend, bring your drink containers, and take your first step with us.</p><div class="detail-grid"><div>${img('event','Students making their first return together','game-preview')}</div><div class="paper"><h3>The essentials</h3>${facts()}<div class="status">Event planning is in progress. Date, meeting point and sign-up arrangements will be announced here.</div></div></div><h2>One first return. Three simple steps.</h2><div class="details-list"><article class="paper"><span class="eyebrow">01 · Bring</span><h3>Meet your return crew.</h3><p>Bring empty eligible drink containers in a reusable bag. We will check the containers together before heading to the return point.</p></article><article class="paper"><span class="eyebrow">02 · Return</span><h3>Try it together.</h3><p>Walk with the group to the selected return point and learn how to complete your first return.</p></article><article class="paper"><span class="eyebrow">03 · Share</span><h3>Leave your first story.</h3><p>Write a short reflection on a First Returns card. Add it to our proposed story display and encourage a friend to take part.</p></article></div><h2>Before you join</h2>${[['What should I bring?','Your empty eligible containers, a reusable collection bag and comfortable shoes. Check the official CDS Vic guidance before collecting.'],['Can I come on my own?','Yes. The activity is designed to help students make their first return together, whether they arrive alone or with friends.'],['How do I sign up?','Sign-up is not open yet. This page presents the proposed activity; confirmed arrangements will be added when available.'],['Is this an official CDS Vic event?','This is an independent student-led campaign. It is not an official CDS Vic or Victorian Government event.']].map(([q,a])=>`<details><summary>${q}</summary><p>${a}</p></details>`).join('')}<div class="actions page-end">${gameButton('Try a virtual return')}</div></div>`;
+}
+function donationPage() {
+ return `<div class="detail donation-page"><a class="back" href="#home/pack">← Back to campaign</a><span class="round-icon yellow large-icon">${donationIcon}</span><span class="eyebrow">Donation · Coming soon</span><h1>A little support.<br>More first returns.</h1><p class="detail-lead">We’re preparing a way for you to support the campaign.</p><div class="paper"><h3>Awareness is the goal.</h3><p>Our aim is to help more students feel confident making their first return. Future donations would help cover activity-guide printing, organiser gifts and pack materials.</p><p>We are developing this as a not-for-profit campaign initiative. Donations are not open yet, and this website does not collect payments.</p><p>Your container refund is yours. Supporting our campaign would be a separate, voluntary choice.</p></div><div class="actions page-end">${button('Back to the Campaign','#home/pack')}</div></div>`;
+}
+function mediaPage() {
+ return `<div class="detail"><a class="back" href="#home">← Back to campaign</a><span class="eyebrow">Media & resources</span><h1>A first return<br>worth sharing.</h1><p class="detail-lead">An independent student-led campaign helping university students feel ready to make their first container return.</p><div class="details-list"><article class="paper"><h3>Media pack</h3><p>Our press release, media contact and outlet list are being prepared.</p><span class="coming-soon">Coming soon</span></article><article class="paper"><h3>Social videos</h3><p>Three short campaign videos will be added here.</p><span class="coming-soon">Coming soon</span></article><article class="paper"><h3>Campaign pitch</h3><p>Our campaign pitch video will be available here.</p><span class="coming-soon">Coming soon</span></article></div><h2>Campaign imagery</h2><p>Download our event illustration and sticker artwork.</p><div class="actions"><a class="button" href="assets/event.png" download="first-return-event.png">Event illustration ↓</a><a class="button outline" href="assets/stickers.png" download="first-return-stickers.png">Sticker artwork ↓</a></div><p class="note">Concept illustrations of the proposed campaign.</p></div>`;
+}
+const pageFunctions = {home, event:eventPage, donation:donationPage, media:mediaPage};
+let activePage = '';
+let activeGuide = null;
+function route() {
+ const [requested = 'home', anchor] = location.hash.slice(1).split('/');
+ const page = Object.hasOwn(pageFunctions,requested) ? requested : 'home';
+ if (page !== activePage) {app.innerHTML = pageFunctions[page](); activePage = page; activeGuide = null;}
+ document.title = `${page === 'home' ? '' : page.charAt(0).toUpperCase()+page.slice(1)+' · '}First Return, First 10¢`;
+ document.querySelectorAll('nav a').forEach(a => {if(a.hash === location.hash) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current');});
+ if(anchor) requestAnimationFrame(()=>document.getElementById(anchor)?.scrollIntoView({block:'start'}));
+ else {window.scrollTo({top:0,behavior:'instant'});app.focus({preventScroll:true});}
+}
+function openGuide(index) {
+ const panel = document.getElementById('return-guide');
+ if(!panel || !guides[index]) return;
+ const close = activeGuide === index;
+ activeGuide = close ? null : index;
+ panel.hidden = close;
+ document.querySelectorAll('.guide-trigger').forEach(b=>b.setAttribute('aria-expanded',String(!close && Number(b.dataset.guide) === index)));
+ if(!close) {
+  panel.innerHTML = `<button class="close-guide" aria-label="Close return guide">×</button>${guides[index]()}`;
+  panel.setAttribute('tabindex','-1');
+  panel.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
+  panel.focus({preventScroll:true});
+ }
+}
+document.addEventListener('click', e=>{
+ const guide=e.target.closest('[data-guide]');
+ if(guide) openGuide(Number(guide.dataset.guide));
+ if(e.target.closest('.close-guide')) {const index=activeGuide;openGuide(index);document.querySelector(`.guide-trigger[data-guide="${index}"]`)?.focus();}
+ const a=e.target.closest('a');
+ if(a && a.getAttribute('href') === location.hash) {e.preventDefault();route();}
+});
+window.addEventListener('hashchange',route);
+route();
